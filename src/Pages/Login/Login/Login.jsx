@@ -3,13 +3,23 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
-    console.log(email);
+    const password = form.password.value;
+    console.log(email, password);
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div className="my-20">
@@ -60,7 +70,13 @@ const Login = () => {
                 <FaLinkedin></FaLinkedin>
               </div>
             </div>
-            <p className="text-center">Don't have an account? <Link className="text-orange-500 font-bold" to='/signup'>Sign up</Link> now</p>
+            <p className="text-center">
+              Don't have an account?{" "}
+              <Link className="text-orange-500 font-bold" to="/signup">
+                Sign up
+              </Link>{" "}
+              now
+            </p>
           </form>
         </div>
       </div>
