@@ -15,3 +15,4 @@ const firebaseConfig = {
 console.log(import.meta.env.VITE_apiKey);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export default app;
